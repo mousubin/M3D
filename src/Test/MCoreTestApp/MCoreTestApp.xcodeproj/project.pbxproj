@@ -169,7 +169,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/../../include";
+				USER_HEADER_SEARCH_PATHS = ../../../include;
 			};
 			name = Debug;
 		};
@@ -206,7 +206,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/../../include";
+				USER_HEADER_SEARCH_PATHS = ../../../include;
 			};
 			name = Release;
 		};
