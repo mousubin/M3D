@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:include"
+      name = "include">
+      <Group
+         location = "group:math"
+         name = "math">
+         <FileRef
+            location = "group:vec2.h">
+         </FileRef>
+         <FileRef
+            location = "group:vec3.h">
+         </FileRef>
+         <FileRef
+            location = "group:vec4.h">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:UnitTest"
+         name = "UnitTest">
+         <FileRef
+            location = "group:UnitTest.h">
+         </FileRef>
+      </Group>
+   </Group>
+   <Group
+      location = "container:"
+      name = "src">
+      <Group
+         location = "container:"
+         name = "Test">
+         <FileRef
+            location = "group:src/Test/MCoreTestApp/MCoreTestApp.xcodeproj">
+         </FileRef>
+      </Group>
+   </Group>
+</Workspace>
