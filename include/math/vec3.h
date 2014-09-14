@@ -16,6 +16,7 @@ template<class T>
 struct vec3_t
 {
     T x, y, z;
+    vec3_t(){}
     vec3_t(float xx, float yy, float zz){
         x = xx; y = yy; z = zz;
     }
