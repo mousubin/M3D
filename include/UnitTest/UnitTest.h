@@ -103,6 +103,14 @@ namespace mut {
         }
     };
     
+    class MHandler
+    {
+    public:
+        int operator()(){
+            return 1;
+        }
+    };
+    
 #define TestCase(X) \
     class TestCase_##X : public MTestCase \
     { \
