@@ -10,7 +10,7 @@
 #define M3D_vec3_h
 
 
-namespace MCore {
+namespace mco {
 
 template<class T>
 struct vec3_t
@@ -28,6 +28,18 @@ struct vec3_t
     }
     vec3_t(unsigned char xx, unsigned char yy, unsigned char zz){
         x = xx; y = yy; z = zz;
+    }
+    vec3_t &operator = (vec3_t<float> &v){
+        x = v.x; y = v.y; z = v.z;
+        return *this;
+    }
+    vec3_t &operator = (vec3_t<double> &v){
+        x = v.x; y = v.y; z = v.z;
+        return *this;
+    }
+    vec3_t &operator = (vec3_t<int> &v){
+        x = v.x; y = v.y; z = v.z;
+        return *this;
     }
 };
 

@@ -10,24 +10,36 @@
 #define _UnitTest_h
 
 #include <vector>
+#include <iostream>
 
-namespace MUnitTest {
-    
-    
-#define TestCase(X) class TestCase_##X : public MTestCase { \
-    typedef TestCase_##X TestCase_Class; \
-    void run(){ \
-        std::vector<TestItemFunc>::iterator iter;\
-        for (iter = _items.begin(); iter != _items.end(); iter++) {\
-            (this->*(*iter))();\
-        }\
-    }\
-    void _anonymous_()
-#define EndTestCase };
-#define TestItem(X) } public: void TestItem_##X() { \
-    reg(static_cast<TestItemFunc>(&TestCase_Class::TestItem_##X));
+namespace mut {
 
-    
+//    
+//#define TestCase(X) \
+//    class TestCase_##X : public MTestCase \
+//    { \
+//    public: \
+//        typedef TestCase_##X TestCase_Class; \
+//        TestCase_##X() { \
+//             \
+//        } \
+//        void run(){ \
+//            std::vector<TestItemFunc>::iterator iter;\
+//            for (iter = _items.begin(); iter != _items.end(); iter++) {\
+//                (this->*(*iter))();\
+//            }\
+//    }\
+//    void _anonymous_()
+//#define EndTestCase(X) }; \
+//    const TestCase_##X *__tc_##X = new TestCase_##X; MTestSuite::getInstance()->reg(__tc_##X);
+//    
+//#define TestItem(X) } public: void TestItem_##X() { \
+//    reg(static_cast<TestItemFunc>(&TestCase_Class::TestItem_##X));
+//
+//#define TestOne(X, Y)   X; \
+//    if (Y) MTestSuite::getInstance()->log("Ok"); \
+//    else MTestSuite::getInstance()->log("Error");
+
     class MTestCase
     {
     public:
@@ -37,13 +49,88 @@ namespace MUnitTest {
         void reg(TestItemFunc func) {
             _items.push_back(func);
         }
-        
+        void run(){
+            std::vector<TestItemFunc>::iterator iter;
+            for (iter = _items.begin(); iter != _items.end(); iter++){
+                (this->*(*iter))();
+            }
+        }
+        void destroy(){
+            delete this;
+        }
     };
     
     class MTestSuite
     {
+        std::vector<MTestCase *> _cases;
+    public:
+        ~MTestSuite(){
+            std::vector<MTestCase *>::iterator iter;
+            for (iter = _cases.begin(); iter != _cases.end(); iter++){
+                (*iter)->destroy();
+            }
+        }
+        static MTestSuite *getInstance(){
+            static MTestSuite *pMTS = NULL;
+            if (pMTS == NULL)
+                pMTS = new MTestSuite;
+            return pMTS;
+        }
+        void log(const char *Format, ...){
+            std::cout << Format;
+        }
+        void run(){
+            std::vector<MTestCase *>::iterator iter;
+            for (iter = _cases.begin(); iter != _cases.end(); iter++){
+                (*iter)->run();
+            }
+        }
+        void reg(MTestCase *pCase){
+            _cases.push_back(pCase);
+        }
     };
     
+    template <MTestCase *ptc, MTestCase::TestItemFunc f>
+    class MTestCaseItemHandler
+    {
+        std::string _str;
+        int _n;
+        MTestCase::TestItemFunc _f;
+    public:
+        MTestCaseItemHandler()
+        {
+            ptc->reg(f);
+        }
+    };
+    
+#define TestCase(X) \
+    class TestCase_##X : public MTestCase \
+    { \
+    public: \
+        typedef TestCase_##X TestCase_Class; \
+        const char *_name; \
+        TestCase_##X() : _name(#X) { \
+            MTestSuite::getInstance()->reg(this);\
+        } \
+        void run(){ \
+            std::vector<TestItemFunc>::iterator iter;\
+            for (iter = _items.begin(); iter != _items.end(); iter++) {\
+            (this->*(*iter))();\
+        }\
+    }\
+    void _anonymous_()
+    
+#define EndTestCase(X) }; \
+    const TestCase_##X *__tc_##X = new TestCase_##X;
+    
+    
+#define TestItem(X) } \
+    public: void TestItem_##X() { \
+    reg(static_cast<TestItemFunc>(&TestCase_Class::TestItem_##X));
+    
+#define TestOne(X, Y)   X; \
+    if (Y) MTestSuite::getInstance()->log("Ok"); \
+    else MTestSuite::getInstance()->log("Error");
 
 }
 

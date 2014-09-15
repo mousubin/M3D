@@ -10,7 +10,7 @@
 #define M3D_vec2_h
 
 
-namespace MCore {
+namespace mco {
 
 template<class T>
 struct vec2_t
