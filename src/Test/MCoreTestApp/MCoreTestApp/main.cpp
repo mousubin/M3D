@@ -10,7 +10,27 @@
 #include <stdio.h>
 
 #include "UnitTest/UnitTest.h"
+#include "T_vec3.h"
 
+class MTCaseBase
+{
+public:
+    typedef void (MTCaseBase::*TestFunc)(void);
+    void init();
+    void reg();
+    void run();
+};
+
+class TVec : public MTCaseBase
+{
+public:
+    void init(){
+        reg();
+    }
+    void test1(){
+        
+    }
+};
 
 //template <class T>
 class MTCase
@@ -56,6 +76,9 @@ TCaseEnd
 
 int main(int argc, const char * argv[])
 {
+    T_Vec3 t;
+    t.init();
+    t.run();
     MTCaseVec3 vvv;
     vvv.init();
     vvv.run();
