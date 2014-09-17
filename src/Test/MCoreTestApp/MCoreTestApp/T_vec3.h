@@ -21,6 +21,7 @@ using namespace mut;
 class T_Vec3 : public MTestCase
 {
 public:
+    T_Vec3(){  _name = "Vec3"; };
     void init(){
         reg(static_cast<MTestObject::TestFunc>(&T_Vec3::t0));
     }

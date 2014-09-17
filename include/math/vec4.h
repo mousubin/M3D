@@ -16,6 +16,7 @@ template<class T>
 struct vec4_t
 {
     T x, y, z, w;
+    vec4_t(){}
     vec4_t(float xx, float yy, float zz, float ww){
         x = xx; y = yy; z = zz; w = ww;
     }
@@ -40,6 +41,6 @@ typedef vec4f vec4;
 
 
 
-｝
+}
 
 #endif

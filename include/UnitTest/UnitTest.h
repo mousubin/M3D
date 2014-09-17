@@ -28,6 +28,8 @@ namespace mut {
     class MTestCase : public MTestObject
     {
         std::vector<MTestObject::TestFunc> _list;
+    protected:
+        std::string _name;
     public:
         void reg(MTestObject::TestFunc f){
             _list.push_back(f);
