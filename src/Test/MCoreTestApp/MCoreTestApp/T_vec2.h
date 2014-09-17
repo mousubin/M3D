@@ -15,15 +15,12 @@
 using namespace mco;
 using namespace mut;
 
-#define MTEST_ITEM(X)   reg(static_cast<MTestObject::TestFunc>(&TestCaseType::X))
 
-#define MTCaseBegin(X)    class MTCase##X : public MTestCase { typedef MTCase##X TestCaseType; public: void init()
-#define MTCaseEnd    };
 
-MTCaseBegin(Vec2)
+MT_BEGIN(Vec2)
 {
-    MTEST_ITEM(f1);
-    MTEST_ITEM(f2);
+    MT_ITEM(f1);
+    MT_ITEM(f2);
 }
 void f1()
 {
@@ -33,7 +30,7 @@ void f2()
 {
     std::cout << "test2\n";
 }
-MTCaseEnd
+MT_END
 
 
 #endif /* defined(__MCoreTestApp__T_vec2__) */

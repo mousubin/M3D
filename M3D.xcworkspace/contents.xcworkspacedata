@@ -5,6 +5,16 @@
       location = "group:include"
       name = "include">
       <Group
+         location = "group:render"
+         name = "render">
+         <FileRef
+            location = "group:RenderTypes.h">
+         </FileRef>
+         <FileRef
+            location = "group:render.h">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:math"
          name = "math">
          <FileRef
@@ -30,9 +40,19 @@
       name = "src">
       <Group
          location = "container:"
+         name = "Render">
+      </Group>
+      <Group
+         location = "container:"
          name = "Test">
          <FileRef
             location = "group:src/Test/MCoreTestApp/MCoreTestApp.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:src/Test/MRenderTest_iOS/MRenderTest_iOS.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:src/Test/MRenderTest_OSX/MRenderTest_OSX.xcodeproj">
          </FileRef>
       </Group>
    </Group>

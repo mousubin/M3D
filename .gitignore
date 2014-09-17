@@ -18,3 +18,4 @@ DerivedData/
 .DS_Store
 debug/
 release/
+bin/

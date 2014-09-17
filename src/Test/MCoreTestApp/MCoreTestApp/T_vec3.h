@@ -30,6 +30,7 @@ public:
         vec3d v3;
         v3 = v1;
         MTEST(v3 = v1, (v3.x = v1.x) && (v3.y == v1.y) && (v3.z = v1.z));
+        MTEST(v3 = v2, false);
 //        v3 = v1 + v2;
 //        v3 = v1 - v2;
 //        v3 = v1 * v2;

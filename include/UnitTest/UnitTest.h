@@ -14,9 +14,7 @@
 
 namespace mut {
 
-    #define MTEST(X, Y)   X; \
-       if (Y) MTestSuite::getInstance()->log("[Test] %s Ok\n", #X); \
-        else MTestSuite::getInstance()->log("Error");
+// base test class
     
     class MTestObject
     {
@@ -49,7 +47,13 @@ namespace mut {
     class MTestSuite : public MTestObject
     {
         std::vector<MTestCase *> _list;
+        int _allCount;
+        int _errCount;
     public:
+        MTestSuite(){
+            _allCount = 0;
+            _errCount = 0;
+        }
         static MTestSuite *getInstance(){
             static MTestSuite *pts = NULL;
             if (pts == NULL)
@@ -60,145 +64,50 @@ namespace mut {
             ptc->init();
             _list.push_back(ptc);
         }
+        void success(bool b) { _allCount++; if (!b) _errCount++; }
         void run(){
+            log("*** [Test Start] ***\n");
             std::vector<MTestCase *>::iterator iter;
             for (iter=_list.begin(); iter!=_list.end(); iter++){
                 (*iter)->begin();
                 (*iter)->run();
                 (*iter)->end();
             }
+            log("*** [ Test End ] ***\nTest Result: count=%d, error=%d.\n", _allCount, _errCount);
         }
-        void log(const char *Format, ...){
-            
-            std::cout << Format;
+        void log(const char *fmt, ...){
+            va_list args;
+            int n;
+            va_start(args, fmt);
+            char buf[4096];
+            n = vsprintf(buf, fmt, args);
+            va_end(args);
+            std::cout << buf;
         }
     };
     
-//#define TestCase(X) \
-//    class TestCase_##X : public MTestCase \
-//    { \
-//    public: \
-//        typedef TestCase_##X TestCase_Class; \
-//        TestCase_##X() { \
-//             \
-//        } \
-//        void run(){ \
-//            std::vector<TestItemFunc>::iterator iter;\
-//            for (iter = _items.begin(); iter != _items.end(); iter++) {\
-//                (this->*(*iter))();\
-//            }\
-//    }\
-//    void _anonymous_()
-//#define EndTestCase(X) }; \
-//    const TestCase_##X *__tc_##X = new TestCase_##X; MTestSuite::getInstance()->reg(__tc_##X);
-//    
-//#define TestItem(X) } public: void TestItem_##X() { \
-//    reg(static_cast<TestItemFunc>(&TestCase_Class::TestItem_##X));
-//
-//#define TestOne(X, Y)   X; \
-//    if (Y) MTestSuite::getInstance()->log("Ok"); \
-//    else MTestSuite::getInstance()->log("Error");
 
-//    class MTestCase
-//    {
-//    public:
-//        typedef void (MTestCase::*TestItemFunc)(void);
-//        std::vector<TestItemFunc> _items;
-//    public:
-//        void reg(TestItemFunc func) {
-//            _items.push_back(func);
-//        }
-//        void run(){
-//            std::vector<TestItemFunc>::iterator iter;
-//            for (iter = _items.begin(); iter != _items.end(); iter++){
-//                (this->*(*iter))();
-//            }
-//        }
-//        void destroy(){
-//            delete this;
-//        }
-//    };
-//    
-//    class MTestSuite
-//    {
-//        std::vector<MTestCase *> _cases;
-//    public:
-//        ~MTestSuite(){
-//            std::vector<MTestCase *>::iterator iter;
-//            for (iter = _cases.begin(); iter != _cases.end(); iter++){
-//                (*iter)->destroy();
-//            }
-//        }
-//        static MTestSuite *getInstance(){
-//            static MTestSuite *pMTS = NULL;
-//            if (pMTS == NULL)
-//                pMTS = new MTestSuite;
-//            return pMTS;
-//        }
-//        void log(const char *Format, ...){
-//            std::cout << Format;
-//        }
-//        void run(){
-//            std::vector<MTestCase *>::iterator iter;
-//            for (iter = _cases.begin(); iter != _cases.end(); iter++){
-//                (*iter)->run();
-//            }
-//        }
-//        void reg(MTestCase *pCase){
-//            _cases.push_back(pCase);
-//        }
-//    };
-//    
-//    template <MTestCase *ptc, MTestCase::TestItemFunc f>
-//    class MTestCaseItemHandler
-//    {
-//        std::string _str;
-//        int _n;
-//        MTestCase::TestItemFunc _f;
-//    public:
-//        MTestCaseItemHandler()
-//        {
-//            ptc->reg(f);
-//        }
-//    };
-//    
-//    class MHandler
-//    {
-//    public:
-//        int operator()(){
-//            return 1;
-//        }
-//    };
-//    
-//#define TestCase(X) \
-//    class TestCase_##X : public MTestCase \
-//    { \
-//    public: \
-//        typedef TestCase_##X TestCase_Class; \
-//        const char *_name; \
-//        TestCase_##X() : _name(#X) { \
-//            MTestSuite::getInstance()->reg(this);\
-//        } \
-//        void run(){ \
-//            std::vector<TestItemFunc>::iterator iter;\
-//            for (iter = _items.begin(); iter != _items.end(); iter++) {\
-//            (this->*(*iter))();\
-//        }\
-//    }\
-//    void _anonymous_()
-//    
-//#define EndTestCase(X) }; \
-//    const TestCase_##X *__tc_##X = new TestCase_##X;
-//    
-//    
-//#define TestItem(X) } \
-//    public: void TestItem_##X() { \
-//    reg(static_cast<TestItemFunc>(&TestCase_Class::TestItem_##X));
-//    
-//#define TestOne(X, Y)   X; \
-//    if (Y) MTestSuite::getInstance()->log("Ok"); \
-//    else MTestSuite::getInstance()->log("Error");
+#define MTEST(X, Y)   { MTestSuite &ts=*MTestSuite::getInstance();\
+    X; bool b=(Y); ts.success(b); \
+    if (Y) MTestSuite::getInstance()->log("[Test ok] %s\n", #X); \
+    else MTestSuite::getInstance()->log("[Test error] %s\n", #X); }
+    
+#define MTEST_LOG(log, X, Y)
+    
+#define MT_CASES
+#define MT_RUN  mut::MTestSuite::getInstance()->run();
+    
+#define MTCaseType(X)   typedef X   TestCaseType
 
+#define MT_CASE(X)      MTestSuite::getInstance()->reg(new T_##X);
+#define MT_CASE_CLASS(X)    MTestSuite::getInstance()->reg(new X);
+#define MT_ITEM(X)      reg(static_cast<MTestObject::TestFunc>(&TestCaseType::X))
+    
+#define MT_BEGIN(X)     class T_##X : public MTestCase { typedef T_##X TestCaseType; public: void init()
+#define MT_END          };
+    
+    
+    
 }
 
 #endif

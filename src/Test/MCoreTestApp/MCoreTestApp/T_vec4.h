@@ -15,15 +15,13 @@
 using namespace mco;
 using namespace mut;
 
-#define MTEST_CASE(X)   typedef X   TestCaseType
-#define MTEST_ITEM(X)   reg(static_cast<MTestObject::TestFunc>(&TestCaseType::X))
 
 class T_Vec4 : public MTestCase
 { 
-    MTEST_CASE(T_Vec4);
+    MTCaseType(T_Vec4);
 public:
     void init(){
-        MTEST_ITEM(t0);
+        MT_ITEM(t0);
     }
     void t0(){
         vec4f v1;
