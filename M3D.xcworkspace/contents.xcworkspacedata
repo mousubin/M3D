@@ -11,7 +11,16 @@
             location = "group:RenderTypes.h">
          </FileRef>
          <FileRef
-            location = "group:render.h">
+            location = "group:Render.h">
+         </FileRef>
+         <FileRef
+            location = "group:Vertex.h">
+         </FileRef>
+         <FileRef
+            location = "group:Shader.h">
+         </FileRef>
+         <FileRef
+            location = "group:ShaderCode.h">
          </FileRef>
       </Group>
       <Group
@@ -45,6 +54,16 @@
       <Group
          location = "container:"
          name = "Test">
+         <Group
+            location = "group:src/Test/MRenderTestShare"
+            name = "MRenderTestShare">
+            <FileRef
+               location = "group:T_Render.cpp">
+            </FileRef>
+            <FileRef
+               location = "group:T_Render.h">
+            </FileRef>
+         </Group>
          <FileRef
             location = "group:src/Test/MCoreTestApp/MCoreTestApp.xcodeproj">
          </FileRef>

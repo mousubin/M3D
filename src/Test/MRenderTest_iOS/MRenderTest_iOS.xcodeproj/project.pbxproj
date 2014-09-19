@@ -26,6 +26,7 @@
 		04B7122319C9BFD500C19D41 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B711FA19C9BFD500C19D41 /* UIKit.framework */; };
 		04B7122B19C9BFD500C19D41 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04B7122919C9BFD500C19D41 /* InfoPlist.strings */; };
 		04B7122D19C9BFD500C19D41 /* MRenderTest_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B7122C19C9BFD500C19D41 /* MRenderTest_iOSTests.m */; };
+		04B7127E19CAFCE900C19D41 /* T_Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B7127C19CAFCE900C19D41 /* T_Render.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		04B7122819C9BFD500C19D41 /* MRenderTest_iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MRenderTest_iOSTests-Info.plist"; sourceTree = "<group>"; };
 		04B7122A19C9BFD500C19D41 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04B7122C19C9BFD500C19D41 /* MRenderTest_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRenderTest_iOSTests.m; sourceTree = "<group>"; };
+		04B7127C19CAFCE900C19D41 /* T_Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = T_Render.cpp; path = ../MRenderTestShare/T_Render.cpp; sourceTree = "<group>"; };
+		04B7127D19CAFCE900C19D41 /* T_Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = T_Render.h; path = ../MRenderTestShare/T_Render.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,7 @@
 		04B711EA19C9BFD500C19D41 = {
 			isa = PBXGroup;
 			children = (
+				04B7127B19CAFCDB00C19D41 /* TestCase */,
 				04B7120019C9BFD500C19D41 /* MRenderTest_iOS */,
 				04B7122619C9BFD500C19D41 /* MRenderTest_iOSTests */,
 				04B711F519C9BFD500C19D41 /* Frameworks */,
@@ -167,6 +171,15 @@
 				04B7122919C9BFD500C19D41 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04B7127B19CAFCDB00C19D41 /* TestCase */ = {
+			isa = PBXGroup;
+			children = (
+				04B7127C19CAFCE900C19D41 /* T_Render.cpp */,
+				04B7127D19CAFCE900C19D41 /* T_Render.h */,
+			);
+			name = TestCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B7127E19CAFCE900C19D41 /* T_Render.cpp in Sources */,
 				04B7121819C9BFD500C19D41 /* ViewController.mm in Sources */,
 				04B7120B19C9BFD500C19D41 /* AppDelegate.m in Sources */,
 				04B7120719C9BFD500C19D41 /* main.m in Sources */,
@@ -408,7 +422,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MRenderTest_iOS/MRenderTest_iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = __MRENDER_IOS__;
 				INFOPLIST_FILE = "MRenderTest_iOS/MRenderTest_iOS-Info.plist";
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = ../../../include;
 				WRAPPER_EXTENSION = app;
@@ -422,7 +438,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MRenderTest_iOS/MRenderTest_iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = __MRENDER_IOS__;
 				INFOPLIST_FILE = "MRenderTest_iOS/MRenderTest_iOS-Info.plist";
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = ../../../include;
 				WRAPPER_EXTENSION = app;
@@ -488,6 +506,7 @@
 				04B7123219C9BFD500C19D41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		04B7123319C9BFD500C19D41 /* Build configuration list for PBXNativeTarget "MRenderTest_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +515,7 @@
 				04B7123519C9BFD600C19D41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

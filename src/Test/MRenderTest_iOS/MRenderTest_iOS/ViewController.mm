@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#include "render/render.h"
+#include "../../MRenderTestShare/T_Render.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -98,36 +98,36 @@ GLfloat gCubeVertexData[216] =
 - (BOOL)validateProgram:(GLuint)prog;
 @end
 
-class iOSTarget : public mrd::Target
-{
-    EAGLContext *_context;
-public:
-    iOSTarget(EAGLContext *context) {
-        _context = context;
-    }
-    void active() {
-        [EAGLContext setCurrentContext:_context];
-    }
-};
-
-class iOSTargetFactory : public mrd::TargetFactory
-{
-    EAGLContext *_context;
-public:
-    static iOSTargetFactory *getInstance(){
-        static iOSTargetFactory *_tf = NULL;
-        if (_tf == NULL) {
-            _tf = new iOSTargetFactory;
-        }
-        return _tf;
-    }
-    void setContext(EAGLContext *context) {
-        _context = context;
-    }
-    virtual mrd::Target *createTarget() {
-        return new iOSTarget(_context);
-    }
-};
+//class iOSTarget : public mrd::Target
+//{
+//    EAGLContext *_context;
+//public:
+//    iOSTarget(EAGLContext *context) {
+//        _context = context;
+//    }
+//    void active() {
+//        [EAGLContext setCurrentContext:_context];
+//    }
+//};
+//
+//class iOSTargetFactory : public mrd::TargetFactory
+//{
+//    EAGLContext *_context;
+//public:
+//    static iOSTargetFactory *getInstance(){
+//        static iOSTargetFactory *_tf = NULL;
+//        if (_tf == NULL) {
+//            _tf = new iOSTargetFactory;
+//        }
+//        return _tf;
+//    }
+//    void setContext(EAGLContext *context) {
+//        _context = context;
+//    }
+//    virtual mrd::Target *createTarget() {
+//        return new iOSTarget(_context);
+//    }
+//};
 
 @implementation ViewController
 
@@ -141,9 +141,9 @@ public:
         NSLog(@"Failed to create ES context");
     }
     
-    iOSTargetFactory *tf = iOSTargetFactory::getInstance();
-    tf->setContext(self.context);
-    mrd::RenderSystem::getInstance()->installTargetFactory(tf);
+//    iOSTargetFactory *tf = iOSTargetFactory::getInstance();
+//    tf->setContext(self.context);
+//    mrd::RenderSystem::getInstance()->installTargetFactory(tf);
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -252,12 +252,15 @@ public:
     _rotation += self.timeSinceLastUpdate * 0.5f;
 }
 
+
+
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    mrd::Render render;
-    render.beginScene();
-    render.clear();
-    render.endScene();
+    RenderTestSuite::getInstance(0)->run();
+//    mrd::Render render;
+//    render.beginScene();
+//    render.clear();
+//    render.endScene();
 //    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
 //    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //    

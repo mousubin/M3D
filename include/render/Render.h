@@ -10,12 +10,8 @@
 #define _render_h
 
 #include "RenderTypes.h"
-
-#ifdef __MRENDER_IOS__
-#include <OpenGLES/ES1/gl.h>
-#else
-#include <OpenGL/gl.h>
-#endif
+#include "Vertex.h"
+#include "Shader.h"
 
 namespace mrd {
     
@@ -31,9 +27,11 @@ namespace mrd {
         virtual Target *createTarget() = 0;
     };
     
+    class Render;
     class RenderSystem
     {
         TargetFactory *_tf;
+        Render *_rd;
     public:
         static RenderSystem *getInstance(){
             static RenderSystem *prs = NULL;
@@ -45,6 +43,7 @@ namespace mrd {
         void installTargetFactory(TargetFactory *ptf){
             _tf = ptf;
         }
+        Render* getRender(){ return _rd; }
     };
     
     class Render
@@ -55,12 +54,18 @@ namespace mrd {
         }
         void beginScene(){}
         void endScene(){}
-        void clear() {
-            glClearColor(1.0f, 0, 0, 0);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        }
         void show() {
             glFlush();
+        }
+    public:
+        void clear(int bufferBit){
+            glClear(bufferBit);
+        }
+        void clearColor(unsigned int cr){
+            glClearColor(1, 1, 0, 1);
+        }
+        void draw(int mode, int first, int count) {
+            glDrawArrays(mode, first, count);
         }
     };
     

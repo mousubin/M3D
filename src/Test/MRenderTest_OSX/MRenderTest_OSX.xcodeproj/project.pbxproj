@@ -20,6 +20,7 @@
 		04B7126D19C9D30C00C19D41 /* MRenderTest_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B7126C19C9D30C00C19D41 /* MRenderTest_OSXTests.m */; };
 		04B7127719C9D32100C19D41 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B7127619C9D32100C19D41 /* OpenGL.framework */; };
 		04B7127A19C9D66D00C19D41 /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04B7127919C9D66D00C19D41 /* View.mm */; };
+		04B7128219CC6A6E00C19D41 /* T_Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B7128019CC6A6E00C19D41 /* T_Render.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		04B7127619C9D32100C19D41 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		04B7127819C9D66D00C19D41 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		04B7127919C9D66D00C19D41 /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
+		04B7128019CC6A6E00C19D41 /* T_Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = T_Render.cpp; path = ../MRenderTestShare/T_Render.cpp; sourceTree = "<group>"; };
+		04B7128119CC6A6E00C19D41 /* T_Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = T_Render.h; path = ../MRenderTestShare/T_Render.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 		04B7123619C9D30C00C19D41 = {
 			isa = PBXGroup;
 			children = (
+				04B7127F19CC6A6100C19D41 /* TestCase */,
 				04B7124819C9D30C00C19D41 /* MRenderTest_OSX */,
 				04B7126619C9D30C00C19D41 /* MRenderTest_OSXTests */,
 				04B7124119C9D30C00C19D41 /* Frameworks */,
@@ -161,6 +165,15 @@
 				04B7126919C9D30C00C19D41 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04B7127F19CC6A6100C19D41 /* TestCase */ = {
+			isa = PBXGroup;
+			children = (
+				04B7128019CC6A6E00C19D41 /* T_Render.cpp */,
+				04B7128119CC6A6E00C19D41 /* T_Render.h */,
+			);
+			name = TestCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B7128219CC6A6E00C19D41 /* T_Render.cpp in Sources */,
 				04B7125619C9D30C00C19D41 /* AppDelegate.m in Sources */,
 				04B7124F19C9D30C00C19D41 /* main.m in Sources */,
 				04B7127A19C9D66D00C19D41 /* View.mm in Sources */,
@@ -478,6 +492,7 @@
 				04B7127219C9D30C00C19D41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		04B7127319C9D30C00C19D41 /* Build configuration list for PBXNativeTarget "MRenderTest_OSXTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +501,7 @@
 				04B7127519C9D30C00C19D41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

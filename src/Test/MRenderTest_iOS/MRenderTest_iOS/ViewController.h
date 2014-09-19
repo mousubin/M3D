@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-#define __MRENDER_IOS__
 
 @interface ViewController : GLKViewController
 

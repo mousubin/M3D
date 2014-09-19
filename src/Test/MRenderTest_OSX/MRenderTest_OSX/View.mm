@@ -9,7 +9,9 @@
 #import "View.h"
 
 #include <OpenGL/gl.h>
-#include "render/render.h"
+
+#include "../../MRenderTestShare/T_Render.h"
+
 
 class OSXTarget : public mrd::Target
 {
@@ -63,11 +65,7 @@ public:
 {
     [super drawRect:dirtyRect];
     
-    mrd::Render render;
-    render.beginScene();
-    render.clear();
-    render.endScene();
-    render.show();
+    RenderTestSuite::getInstance(0)->run();
 }
 
 @end
