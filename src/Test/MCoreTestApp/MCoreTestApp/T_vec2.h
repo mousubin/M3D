@@ -24,11 +24,11 @@ MT_BEGIN(Vec2)
 }
 void f1()
 {
-    std::cout << "test1\n";
+    std::cout << "\ttest1\n";
 }
 void f2()
 {
-    std::cout << "test2\n";
+    std::cout << "\ttest2\n";
 }
 MT_END
 

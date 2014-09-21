@@ -12,6 +12,7 @@
 #include "RenderTypes.h"
 #include "Vertex.h"
 #include "Shader.h"
+#include "math/vec4.h"
 
 namespace mrd {
     
@@ -61,8 +62,10 @@ namespace mrd {
         void clear(int bufferBit){
             glClear(bufferBit);
         }
-        void clearColor(unsigned int cr){
-            glClearColor(1, 1, 0, 1);
+        void clearColor(unsigned int color){
+            Color cr;
+            cr.fromUINT(color);
+            glClearColor(cr.r, cr.g, cr.b, cr.a);
         }
         void draw(int mode, int first, int count) {
             glDrawArrays(mode, first, count);

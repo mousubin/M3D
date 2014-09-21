@@ -42,6 +42,9 @@
          <FileRef
             location = "group:UnitTest.h">
          </FileRef>
+         <FileRef
+            location = "group:UnitTestRender.h">
+         </FileRef>
       </Group>
    </Group>
    <Group

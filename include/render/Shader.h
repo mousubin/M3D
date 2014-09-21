@@ -26,6 +26,10 @@ namespace mrd {
             _retVS = 0; _retPS = 0; _retPG = 0;
             _log[0] = 0;
         }
+        ~Shader() {
+            if (_idPG)
+                glDeleteProgram(_idPG);
+        }
         operator unsigned int() { return _idPG; }
         void setSource(const char *vs[], const char *ps[]) {
             _idVS = glCreateShader(GL_VERTEX_SHADER);
@@ -51,6 +55,8 @@ namespace mrd {
             glAttachShader(_idPG, _idPS);
         }
         bool make() {
+            if (!_idPG)
+                return false;
             glLinkProgram(_idPG);
             glGetProgramiv(_idPG, GL_LINK_STATUS, &_retPG);
             if (!_retPG) {
@@ -62,6 +68,15 @@ namespace mrd {
             if (!_retPG) {
                 int n;
                 glGetProgramInfoLog(_idPG, 256, &n, _log);
+            }
+            
+            if (_idVS) {
+                glDetachShader(_idPG, _idVS);
+                glDeleteShader(_idVS);
+            }
+            if (_idPS) {
+                glDetachShader(_idPG, _idPS);
+                glDeleteShader(_idPS);
             }
             return true;
         }

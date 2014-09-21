@@ -58,14 +58,32 @@ public:
     tf->setContext(self.openGLContext);
     mrd::RenderSystem::getInstance()->installTargetFactory(tf);
     
+    
+    
     return self;
+}
+
+- (void)initRender
+{
+    static bool bInit = false;
+    if (bInit)
+        return;
+    bInit = true;
+    
+    _rd = new mrd::Render;
+    
+    MT_CASES
+    {
+        MT_RENDER_CASE(Vertex, _rd)
+    }    
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
-    
-    RenderTestSuite::getInstance(0)->run();
+    [self initRender];
+    MT_RUN
+
 }
 
 @end

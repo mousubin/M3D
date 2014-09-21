@@ -20,11 +20,13 @@ class T_Vec4 : public MTestCase
 { 
     MTCaseType(T_Vec4);
 public:
-    void init(){
+    T_Vec4() : MTestCase("Vec4"){}
+    virtual void init(){
         MT_ITEM(t0);
     }
     void t0(){
         vec4f v1;
+        std::cout << "\tok" << std::endl;
     }
 };
 

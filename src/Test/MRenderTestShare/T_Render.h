@@ -13,59 +13,48 @@
 
 #include "math/vec3.h"
 #include "Render/Render.h"
+#include "UnitTest/UnitTestRender.h"
 
 using namespace mco;
 using namespace mrd;
+using namespace mut;
 
-class RenderTestCase
+class T_Base : public MRenderTestCase
 {
 public:
-    virtual void init() {};
-    virtual void update() {};
-    virtual void render() {}
+    MT_RENDER_CASE_DECLARE(Base)
+    virtual void render() { // clear blue color
+        _rd->clearColor(0xff0000);
+        _rd->clear(ColorBufferBit | DepthBufferBit);
+    }
 };
 
-class T_Render : public RenderTestCase
+class T_Vertex : public MRenderTestCase
 {
-    Target *_target;
-    Render *_rd;
+    VertexBuffer _vb;
+    Shader _shader;
 public:
-    T_Render(Target *target){
-        _target = target;
-        RenderSystem *rs = RenderSystem::getInstance();
-        _rd = rs->getRender();
-    }
-    void run(){
-        _rd->beginScene();
-        
-        tBase();
-        tVertex();
-        
-        _rd->endScene();
-        _rd->show();
-    }
-    void tBase();
-    void tVertex();
-};
+    MT_RENDER_CASE_DECLARE(Vertex)
     
-class RenderTestSuite
-{
-    T_Render *_case;
-public:
-    static RenderTestSuite *getInstance(Target *target){
-        static RenderTestSuite *rts = NULL;
-        if (rts == NULL){
-            rts = new RenderTestSuite;
-            rts->init(target);
-        }
-        return rts;
+    virtual void init() {
+        ColorVertex v[] ={
+            -0.5,  0.5, 0, 0x0000ff,
+            -0.5, -0.5, 0, 0x00ff00,
+            0.5, -0.5, 0, 0xff0000,
+            0.5,  0.5, 0, 0xffffff
+        };
+     
+        _vb.setData(v, sizeof(v), VA_VEC | VA_COLOR);
+        _shader.setSource((const char **)VS_COLOR, (const char **)PS_COLOR);
+        _vb.bindAttrib(_shader);
+        _shader.make();
     }
-    void init(Target *target){
-        _case = new T_Render(target);
-        
-    }
-    void run(){
-        _case->run();
+    virtual void render() {
+       // init();
+        _vb.apply();
+        _shader.apply();
+        _rd->draw(GL_TRIANGLE_FAN, 0, 4);
+        _err = glGetError();
     }
 };
 

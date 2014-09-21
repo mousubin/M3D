@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+#include "Render/Render.h"
 
 @interface ViewController : GLKViewController
+
+@property mrd::Render *rd;
 
 @end

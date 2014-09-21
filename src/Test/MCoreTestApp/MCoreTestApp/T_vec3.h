@@ -21,7 +21,7 @@ using namespace mut;
 class T_Vec3 : public MTestCase
 {
 public:
-    T_Vec3(){  _name = "Vec3"; };
+    T_Vec3(const char *name = "Vec3") : MTestCase(name){};
     void init(){
         reg(static_cast<MTestObject::TestFunc>(&T_Vec3::t0));
     }
@@ -30,7 +30,7 @@ public:
         vec3d v3;
         v3 = v1;
         MTEST(v3 = v1, (v3.x = v1.x) && (v3.y == v1.y) && (v3.z = v1.z));
-        MTEST(v3 = v2, false);
+        MTEST_LOG("vec3d=vec3f", v3 = v2, false);
 //        v3 = v1 + v2;
 //        v3 = v1 - v2;
 //        v3 = v1 * v2;

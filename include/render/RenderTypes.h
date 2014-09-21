@@ -15,10 +15,14 @@
 #include <OpenGL/gl.h>
 #endif
 
+#include "math/vec4.h"
+
 enum ClearBufferBit{
     ColorBufferBit = GL_COLOR_BUFFER_BIT,
     DepthBufferBit = GL_DEPTH_BUFFER_BIT,
 };
+
+typedef mco::vec4f   Color;
 
 enum VertexAttribBit{
     VA_VEC = 1,

@@ -13,6 +13,39 @@
 
 namespace mrd {
     
+    struct ColorVertex
+    {
+        float x, y, z;
+        unsigned int cr;
+    };
+    
+    struct MeshVertex
+    {
+        float x, y, z;
+        float xn, yn, zn;
+    };
+    
+    struct ColorMeshVertex
+    {
+        float x, y, z;
+        float xn, yn, zn;
+        unsigned int cr;
+    };
+    
+    struct ModelVertex
+    {
+        float x, y, z;
+        float xn, yn, zn;
+        float u, v;
+    };
+    
+    struct ColorModelVertex
+    {
+        float x, y, z;
+        float xn, yn, zn;
+        float u, v;
+        float cr;
+    };
     
     class VertexBuffer
     {
@@ -23,10 +56,11 @@ namespace mrd {
         int _stride;
     public:
         VertexBuffer() { _nAttribs = 0; _idBuf = 0; _stride = 0; }
+        ~VertexBuffer() {
+            if (_idBuf)
+                glDeleteBuffers(1, &_idBuf);
+        }
         void setData(void *buf, int sz, unsigned int attrib) {
-            //glGenVertexArraysOES(1, &_vertexArray);
-            //glBindVertexArrayOES(_vertexArray);
-            
             glGenBuffers(1, &_idBuf);
             glBindBuffer(GL_ARRAY_BUFFER, _idBuf);
             glBufferData(GL_ARRAY_BUFFER, sz, buf, GL_STATIC_DRAW);
@@ -65,12 +99,9 @@ namespace mrd {
             glEnableVertexAttribArray(0);
             glEnableVertexAttribArray(1);
         }
+        
     };
-    
-    class VertexObject
-    {
-    
-    };
+
     
 };
 

@@ -15,7 +15,10 @@ namespace mco {
 template<class T>
 struct vec4_t
 {
-    T x, y, z, w;
+    union { T x; T r; };
+    union { T y; T g; };
+    union { T z; T b; };
+    union { T w; T a; };
     vec4_t(){}
     vec4_t(float xx, float yy, float zz, float ww){
         x = xx; y = yy; z = zz; w = ww;
@@ -28,6 +31,12 @@ struct vec4_t
     }
     vec4_t(unsigned char xx, unsigned char yy, unsigned char zz, unsigned char ww){
         x = xx; y = yy; z = zz; w = ww;
+    }
+    void fromUINT(unsigned int cr) {
+        a = (cr >> 24) / 255.0;
+        b = ((cr >> 16) % 256) / 255.0;
+        g = ((cr >> 8) % 256) / 255.0;
+        r = (cr % 256) / 255.0;
     }
 };
 

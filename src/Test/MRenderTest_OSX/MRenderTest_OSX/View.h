@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+#include "Render/Render.h"
+
 @interface View : NSOpenGLView
+
+@property mrd::Render *rd;
+
+
+- (void) initRender;
 
 @end

@@ -150,6 +150,13 @@ GLfloat gCubeVertexData[216] =
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+    
+    _rd = new mrd::Render;
+    
+    MT_CASES
+    {
+        MT_RENDER_CASE(Vertex, _rd);
+    }
 }
 
 - (void)dealloc
@@ -256,7 +263,8 @@ GLfloat gCubeVertexData[216] =
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    RenderTestSuite::getInstance(0)->run();
+ //   RenderTestSuite::getInstance(0)->run();
+    MT_RUN;
 //    mrd::Render render;
 //    render.beginScene();
 //    render.clear();
