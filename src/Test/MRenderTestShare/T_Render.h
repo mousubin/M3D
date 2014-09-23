@@ -33,6 +33,7 @@ class T_Vertex : public MRenderTestCase
 {
     VertexBuffer _vb;
     Shader _shader;
+    int _mvp;
 public:
     MT_RENDER_CASE_DECLARE(Vertex)
     
@@ -48,11 +49,19 @@ public:
         _shader.setSource((const char **)VS_COLOR, (const char **)PS_COLOR);
         _vb.bindAttrib(_shader);
         _shader.make();
+        _mvp = _shader.getUniform("u_mvp");
     }
     virtual void render() {
        // init();
         _vb.apply();
         _shader.apply();
+        mat4f mPrj, mView;
+        mPrj.makePerspertive(1.5, 0.5, 0.1, 1000);
+        mView.makeTranslation(0, 0, -5);
+        mat4f mvp = mat4f::multiply(mPrj, mView);
+        //mvp.makeIdentity();
+        _shader.setUniform(_mvp, mvp);
+        
         _rd->draw(GL_TRIANGLE_FAN, 0, 4);
         _err = glGetError();
     }

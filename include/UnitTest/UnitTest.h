@@ -122,6 +122,7 @@ namespace mut {
 
 // 注册测试用例：按名称注册，类名为T_名称
 #define MT_CASE(X)      MTestSuite::getInstance()->reg(new T_##X);
+#define MT_CASE_REG     MT_CASE
 // 注册测试用例：指定类名称
 #define MT_CASE_CLASS(X)    MTestSuite::getInstance()->reg(new X(#X));
 

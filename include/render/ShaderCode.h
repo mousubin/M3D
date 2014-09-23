@@ -21,17 +21,19 @@ namespace mrd {
     typedef const char *ShaderStringType;
     
     const ShaderStringType VS_COLOR[] = {
+        "uniform mat4 u_mvp;"\
         "attribute vec4 a_v;" \
         "attribute vec4 a_color;"\
         "varying vec4 v_color;"\
         "void main() {"\
-        "   gl_Position = a_v;"\
+        "   gl_Position = u_mvp * a_v;"\
         "   v_color = a_color;"\
         "}"
     };
     
     const ShaderStringType PS_COLOR[] = {
         ES_PS\
+    
         "varying vec4 v_color;"\
         "void main() {"\
         "   gl_FragColor = v_color;"\

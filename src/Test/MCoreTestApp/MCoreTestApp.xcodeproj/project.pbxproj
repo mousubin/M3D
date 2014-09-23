@@ -12,6 +12,7 @@
 		045E3B6619C4947800B3D5B8 /* T_vec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 045E3B6419C4947800B3D5B8 /* T_vec3.cpp */; };
 		04B7116119C99C5700C19D41 /* T_vec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B7115F19C99C5700C19D41 /* T_vec4.cpp */; };
 		04B7116419C9A1C500C19D41 /* T_vec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B7116219C9A1C500C19D41 /* T_vec2.cpp */; };
+		04ECB96719D1B90A00853F06 /* T_mat4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04ECB96519D1B90A00853F06 /* T_mat4.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		04B7116019C99C5700C19D41 /* T_vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_vec4.h; sourceTree = "<group>"; };
 		04B7116219C9A1C500C19D41 /* T_vec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = T_vec2.cpp; sourceTree = "<group>"; };
 		04B7116319C9A1C500C19D41 /* T_vec2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_vec2.h; sourceTree = "<group>"; };
+		04ECB96519D1B90A00853F06 /* T_mat4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = T_mat4.cpp; sourceTree = "<group>"; };
+		04ECB96619D1B90A00853F06 /* T_mat4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_mat4.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,12 +74,14 @@
 			children = (
 				045E3B5A19C4894600B3D5B8 /* main.cpp */,
 				045E3B5C19C4894600B3D5B8 /* MCoreTestApp.1 */,
+				04B7116219C9A1C500C19D41 /* T_vec2.cpp */,
+				04B7116319C9A1C500C19D41 /* T_vec2.h */,
 				045E3B6419C4947800B3D5B8 /* T_vec3.cpp */,
 				045E3B6519C4947800B3D5B8 /* T_vec3.h */,
 				04B7115F19C99C5700C19D41 /* T_vec4.cpp */,
 				04B7116019C99C5700C19D41 /* T_vec4.h */,
-				04B7116219C9A1C500C19D41 /* T_vec2.cpp */,
-				04B7116319C9A1C500C19D41 /* T_vec2.h */,
+				04ECB96519D1B90A00853F06 /* T_mat4.cpp */,
+				04ECB96619D1B90A00853F06 /* T_mat4.h */,
 			);
 			path = MCoreTestApp;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04ECB96719D1B90A00853F06 /* T_mat4.cpp in Sources */,
 				045E3B5B19C4894600B3D5B8 /* main.cpp in Sources */,
 				04B7116119C99C5700C19D41 /* T_vec4.cpp in Sources */,
 				04B7116419C9A1C500C19D41 /* T_vec2.cpp in Sources */,

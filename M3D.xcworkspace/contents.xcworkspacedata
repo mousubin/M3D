@@ -27,6 +27,9 @@
          location = "group:math"
          name = "math">
          <FileRef
+            location = "group:../math/mat4.h">
+         </FileRef>
+         <FileRef
             location = "group:vec2.h">
          </FileRef>
          <FileRef
@@ -34,6 +37,9 @@
          </FileRef>
          <FileRef
             location = "group:vec4.h">
+         </FileRef>
+         <FileRef
+            location = "group:math.h">
          </FileRef>
       </Group>
       <Group

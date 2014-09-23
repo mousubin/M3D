@@ -9,6 +9,7 @@
 #ifndef _Shader_h
 #define _Shader_h
 
+#include "math/math.h"
 #include "ShaderCode.h"
 
 namespace mrd {
@@ -53,6 +54,12 @@ namespace mrd {
             _idPG = glCreateProgram();
             glAttachShader(_idPG, _idVS);
             glAttachShader(_idPG, _idPS);
+        }
+        int getUniform(const char *name) {
+            return glGetUniformLocation(_idPG, name);
+        }
+        void setUniform(int id, mco::mat4f &m) {
+            glUniformMatrix4fv(id, 1, false, m);
         }
         bool make() {
             if (!_idPG)
