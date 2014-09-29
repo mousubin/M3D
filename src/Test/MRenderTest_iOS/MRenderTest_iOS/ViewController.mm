@@ -155,7 +155,7 @@ GLfloat gCubeVertexData[216] =
     
     MT_CASES
     {
-        MT_RENDER_CASE(Vertex, _rd);
+        MT_RENDER_CASE(Tex, _rd);
     }
 }
 

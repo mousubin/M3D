@@ -22,6 +22,15 @@
          <FileRef
             location = "group:ShaderCode.h">
          </FileRef>
+         <FileRef
+            location = "group:Shape.cpp">
+         </FileRef>
+         <FileRef
+            location = "group:Shape.h">
+         </FileRef>
+         <FileRef
+            location = "group:Texture.h">
+         </FileRef>
       </Group>
       <Group
          location = "group:math"

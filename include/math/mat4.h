@@ -10,7 +10,7 @@
 #define _Matrix4_h
 
 #include <math.h>
-
+#include "vec3.h"
 
 namespace mco {
 
@@ -81,9 +81,54 @@ union mat4_t
     }
     
     void makeRotation(T radians, T x, T y, T z) {
+        vec3_t<T> v(x, y, z);
+        v.normalize();
+        float cos = cosf(radians);
+        float cosp = 1.0f - cos;
+        float sin = sinf(radians);
         
+        m[0] = cos + cosp * v.x * v.x;
+        m[1] = cosp * v.x * v.y + v.z * sin;
+        m[2] = cosp * v.x * v.z - v.y * sin;
+        m[3] = 0.0f;
+        m[4] = cosp * v.x * v.y - v.z * sin;
+        m[5] = cos + cosp * v.y * v.y;
+        m[6] = cosp * v.y * v.z + v.x * sin;
+        m[7] = 0.0f;
+        m[8] = cosp * v.x * v.z + v.y * sin;
+        m[9] = cosp * v.y * v.z - v.x * sin;
+        m[10]= cos + cosp * v.z * v.z;
+        m[11] = m[12] = m[13] = m[14] = 0.0f;
+        m[15] = 1.0f;
     }
     
+    void makeLookAt(T eyeX, T eyeY, T eyeZ, T centerX, T centerY, T centerZ, T upX, T upY, T upZ) {
+        vec3_t<T> ev = { eyeX, eyeY, eyeZ };
+        vec3_t<T> cv = { centerX, centerY, centerZ };
+        vec3_t<T> uv = { upX, upY, upZ };
+        vec3_t<T> n = ev - cv;
+        n.normalize();
+        vec3_t<T> u = uv ^ n;
+        u.normalize();
+        vec3_t<T> v = n ^ u;
+        
+        m[0] = u.x;
+        m[1] = v.x;
+        m[2] = n.x;
+        m[3] = 0.0f;
+        m[4] = u.y;
+        m[5] = v.y;
+        m[6] = n.y;
+        m[7] = 0.0f;
+        m[8] = u.z;
+        m[9] = v.z;
+        m[10] = n.z;
+        m[11] = 0.0f;
+        m[12] = - u * ev;
+        m[13] = - v * ev;
+        m[14] = - n * ev;
+        m[15] = 1.0f;
+    }
 };
 
 typedef mat4_t<float> mat4f;

@@ -15,7 +15,12 @@
 #include <OpenGL/gl.h>
 #endif
 
+
+
 #include "math/vec4.h"
+
+namespace mrd {
+    
 
 enum ClearBufferBit{
     ColorBufferBit = GL_COLOR_BUFFER_BIT,
@@ -25,7 +30,7 @@ enum ClearBufferBit{
 typedef mco::vec4f   Color;
 
 enum VertexAttribBit{
-    VA_VEC = 1,
+    VA_VERTEX = 1,
     VA_NORMAL = 2,
     VA_COLOR = 4,
     VA_TEX0 = 8
@@ -42,10 +47,12 @@ struct VertexAttrib
 };
 
 const VertexAttrib __vaConfig[] ={
-    VA_VEC, 3, GL_FLOAT, false, 12, "a_v",
+    VA_VERTEX, 3, GL_FLOAT, false, 12, "a_v",
     VA_NORMAL, 3, GL_FLOAT, false, 12, "a_vn",
     VA_COLOR, 4, GL_UNSIGNED_BYTE, true, 4, "a_color",
-    VA_TEX0, 3, GL_FLOAT, false, 12, "a_tex0",
+    VA_TEX0, 2, GL_FLOAT, false, 8, "a_tex0",
+};
+    
 };
 
 #endif

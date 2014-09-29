@@ -11,7 +11,9 @@
 
 #include "RenderTypes.h"
 #include "Vertex.h"
+#include "Shape.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "math/vec4.h"
 
 namespace mrd {

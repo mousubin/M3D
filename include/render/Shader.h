@@ -58,8 +58,11 @@ namespace mrd {
         int getUniform(const char *name) {
             return glGetUniformLocation(_idPG, name);
         }
-        void setUniform(int id, mco::mat4f &m) {
+        void setUniform(unsigned int id, mco::mat4f &m) {
             glUniformMatrix4fv(id, 1, false, m);
+        }
+        void setTexture(unsigned int id, unsigned int tex) {
+            glUniform1i(id, tex);
         }
         bool make() {
             if (!_idPG)

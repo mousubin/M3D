@@ -45,7 +45,26 @@ public:
 };
 
 
+
+
+
+CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now, const CVTimeStamp *outputTime,
+                                      CVOptionFlags flagsIn, CVOptionFlags *flagsOut, void *displayLinkContext);
+
+CVReturn OutputCallback(CVDisplayLinkRef displayLink,
+                                                const CVTimeStamp *inNow,
+                                                const CVTimeStamp *outputTime,
+                                                CVOptionFlags flagsIn,
+                                                CVOptionFlags *flagsOut,
+                                                void *displayLinkContext)
+{
+    CVReturn result = [(__bridge View*)displayLinkContext getFrameForTime:outputTime];
+    return result;
+}
+
+
 @implementation View
+
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -54,27 +73,40 @@ public:
         // Initialization code here.
     }
     
-    OSXTargetFactory *tf = OSXTargetFactory::getInstance();
-    tf->setContext(self.openGLContext);
-    mrd::RenderSystem::getInstance()->installTargetFactory(tf);
-    
-    
-    
-    return self;
+        return self;
+}
+
+
+
+- (CVReturn)getFrameForTime:(const CVTimeStamp*)outputTime
+{
+    // Add your drawing codes here
+    [self display];
+    return kCVReturnSuccess;
 }
 
 - (void)initRender
 {
+
+
     static bool bInit = false;
     if (bInit)
         return;
     bInit = true;
     
+     OSXTargetFactory *tf = OSXTargetFactory::getInstance();
+    tf->setContext(self.openGLContext);
+    mrd::RenderSystem::getInstance()->installTargetFactory(tf);
+    
+    CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
+    CVDisplayLinkSetOutputCallback(_displayLink, &OutputCallback, (__bridge void *)self);
+    CVDisplayLinkStart(_displayLink);
+    
     _rd = new mrd::Render;
     
     MT_CASES
     {
-        MT_RENDER_CASE(Vertex, _rd)
+        MT_RENDER_CASE(Shape, _rd)
     }    
 }
 
@@ -83,7 +115,7 @@ public:
     [super drawRect:dirtyRect];
     [self initRender];
     MT_RUN
-
+    //
 }
 
 @end

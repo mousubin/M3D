@@ -47,6 +47,12 @@ namespace mrd {
         float cr;
     };
     
+    struct UIImageVertex
+    {
+        float x, y, z;
+        float u, v;
+    };
+    
     class VertexBuffer
     {
         unsigned int _idBuf;
@@ -93,6 +99,7 @@ namespace mrd {
                 glBindAttribLocation(iPG, i, __vaConfig[_attribs[i]].name);
             }
         }
+        // 如何开启关闭顶点属性数组
         void apply() {
             glBindBuffer(GL_ARRAY_BUFFER, _idBuf);
             setPointer();

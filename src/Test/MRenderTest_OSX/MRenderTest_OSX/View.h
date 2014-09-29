@@ -13,8 +13,10 @@
 @interface View : NSOpenGLView
 
 @property mrd::Render *rd;
+@property CVDisplayLinkRef displayLink;
 
 
 - (void) initRender;
+- (CVReturn)getFrameForTime:(const CVTimeStamp*)outputTime;
 
 @end

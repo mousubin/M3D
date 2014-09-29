@@ -45,7 +45,7 @@ public:
             0.5,  0.5, 0, 0xffffff
         };
      
-        _vb.setData(v, sizeof(v), VA_VEC | VA_COLOR);
+        _vb.setData(v, sizeof(v), VA_VERTEX | VA_COLOR);
         _shader.setSource((const char **)VS_COLOR, (const char **)PS_COLOR);
         _vb.bindAttrib(_shader);
         _shader.make();
@@ -64,6 +64,85 @@ public:
         
         _rd->draw(GL_TRIANGLE_FAN, 0, 4);
         _err = glGetError();
+    }
+};
+
+
+class T_Shape : public MRenderTestCase
+{
+    Shape *_shape;
+    Shader _shader;
+    int _mvp;
+public:
+    MT_RENDER_CASE_DECLARE(Shape)
+    
+    virtual void init() {
+        _shape = ShapeFactory::createPyramid();
+        _shader.setSource((const char **)VS_MESH, (const char **)PS_MESH);
+        _shape->bindAttrib(_shader);
+        _shader.make();
+        _mvp = _shader.getUniform("u_mvp");
+    }
+    virtual void render() {
+        // init();
+        static float radians = 0;
+        radians += 0.01;
+        _shape->apply();
+        _shader.apply();
+        mat4f mPrj, mWorld;
+        mPrj.makePerspertive(1.5, 0.5, 0.1, 1000);
+        mat4f mR;
+        mR.makeRotation(radians, 0.0f, 1.0f, 0.0f);
+        mWorld.makeTranslation(0, 0, -5);
+        mWorld = mat4f::multiply(mWorld, mR);
+        
+        mat4f mView;
+        mView.makeLookAt(0, 3, 10, 0, 0, 0, 0, 1, 0);
+        
+        mat4f mvp = mat4f::multiply(mPrj, mView);
+        //mvp.makeIdentity();
+        _shader.setUniform(_mvp, mvp);
+        
+        _rd->draw(GL_TRIANGLE_FAN, 0, 18);
+        _err = glGetError();
+    }
+};
+
+class T_Tex : public MRenderTestCase
+{
+    Texture2D _tex;
+    VertexBuffer _vb;
+    Shader _shader;
+    int _tex0;
+public:
+    MT_RENDER_CASE_DECLARE(Tex)
+    virtual void init() {
+        unsigned int pixels[512][512];
+        for (int i = 0; i < 512; i++) {
+            for (int j = 0; j < 512; j++)
+                pixels[i][j] = rand();
+        }
+        _tex.setData(512, 512, pixels);
+        _err = glGetError();
+        UIImageVertex v[] = {
+            -0.5,  0.5, 0, 0, 0,
+            -0.5, -0.5, 0, 1, 0,
+            0.5, -0.5, 0, 1, 1,
+            0.5,  0.5, 0, 0, 1
+        };
+        _vb.setData(v, sizeof(v), VA_VERTEX | VA_TEX0);
+        _shader.setSource((const char **)VS_UI, (const char **)PS_UI);
+        _vb.bindAttrib(_shader);
+        _shader.make();
+        _tex0 = _shader.getUniform("u_tex0");
+        _shader.setTexture(_tex0, GL_TEXTURE0);
+        
+    }
+    virtual void render() {
+        _vb.apply();
+        _shader.apply();
+        _tex.apply();
+        _rd->draw(GL_TRIANGLE_FAN, 0, 4);
     }
 };
 

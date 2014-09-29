@@ -28,7 +28,7 @@ namespace mut {
             update();
             _rd->beginScene();
             _rd->clearColor(0x800000);
-            _rd->clear(ColorBufferBit | DepthBufferBit);
+            _rd->clear(mrd::ColorBufferBit | mrd::DepthBufferBit);
             render();
             _rd->endScene();
             _rd->show();
