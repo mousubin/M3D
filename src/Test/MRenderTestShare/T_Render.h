@@ -56,7 +56,7 @@ public:
         _vb.apply();
         _shader.apply();
         mat4f mPrj, mView;
-        mPrj.makePerspertive(1.5, 0.5, 0.1, 1000);
+        mPrj.makePerspertive(1.5f, 0.5f, 0.1f, 1000);
         mView.makeTranslation(0, 0, -5);
         mat4f mvp = mat4f::multiply(mPrj, mView);
         //mvp.makeIdentity();
@@ -86,11 +86,11 @@ public:
     virtual void render() {
         // init();
         static float radians = 0;
-        radians += 0.01;
+        radians += 0.01f;
         _shape->apply();
         _shader.apply();
         mat4f mPrj, mWorld;
-        mPrj.makePerspertive(1.5, 0.5, 0.1, 1000);
+        mPrj.makePerspertive(1.5f, 0.5f, 0.1f, 1000);
         mat4f mR;
         mR.makeRotation(radians, 0.0f, 1.0f, 0.0f);
         mWorld.makeTranslation(0, 0, -5);

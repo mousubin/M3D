@@ -10,9 +10,13 @@
 #define _RenderTypes_h
 
 #ifdef __MRENDER_IOS__
-#include <OpenGLES/ES2/gl.h>
+	#include <OpenGLES/ES2/gl.h>
 #else
-#include <OpenGL/gl.h>
+	#ifdef WIN32
+		#include <GL/glew.h>
+	#else
+		#include <OpenGL/gl.h>
+	#endif
 #endif
 
 

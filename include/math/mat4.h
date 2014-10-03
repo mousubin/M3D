@@ -36,7 +36,7 @@ union mat4_t
         return true;
     }    
     static mat4_t & multiply(mat4_t &left, mat4_t &right) {
-        mat4_t m;
+        static mat4_t m;
         m.m[0]  = left.m[0] * right.m[0]  + left.m[4] * right.m[1]  + left.m[8] * right.m[2]   + left.m[12] * right.m[3];
         m.m[4]  = left.m[0] * right.m[4]  + left.m[4] * right.m[5]  + left.m[8] * right.m[6]   + left.m[12] * right.m[7];
         m.m[8]  = left.m[0] * right.m[8]  + left.m[4] * right.m[9]  + left.m[8] * right.m[10]  + left.m[12] * right.m[11];
@@ -68,7 +68,7 @@ union mat4_t
     }
     
     void makePerspertive(T fovyRadians, T aspect, T nearZ, T farZ) {
-        T cotan = T(1.0 / tanf(fovyRadians / 2.0));
+        T cotan = T(1.0f / tanf(fovyRadians / 2.0f));
         m00 = cotan / aspect; m01 = m02 = m03 = 0.0f;
         m10 = 0.0f; m11 = cotan; m12 = m13 = 0.0f;
         m20 = m21 = 0.0f; m22 = (farZ + nearZ) / (nearZ - farZ); m23 = -1.0f;
@@ -103,9 +103,9 @@ union mat4_t
     }
     
     void makeLookAt(T eyeX, T eyeY, T eyeZ, T centerX, T centerY, T centerZ, T upX, T upY, T upZ) {
-        vec3_t<T> ev = { eyeX, eyeY, eyeZ };
-        vec3_t<T> cv = { centerX, centerY, centerZ };
-        vec3_t<T> uv = { upX, upY, upZ };
+        vec3_t<T> ev(eyeX, eyeY, eyeZ);
+        vec3_t<T> cv(centerX, centerY, centerZ);
+        vec3_t<T> uv(upX, upY, upZ);
         vec3_t<T> n = ev - cv;
         n.normalize();
         vec3_t<T> u = uv ^ n;
