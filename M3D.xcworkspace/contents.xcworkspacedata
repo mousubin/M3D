@@ -23,18 +23,24 @@
             location = "group:ShaderCode.h">
          </FileRef>
          <FileRef
-            location = "group:Shape.cpp">
-         </FileRef>
-         <FileRef
             location = "group:Shape.h">
          </FileRef>
          <FileRef
+            location = "group:Shape.cpp">
+         </FileRef>
+         <FileRef
             location = "group:Texture.h">
+         </FileRef>
+         <FileRef
+            location = "group:Geometry.h">
          </FileRef>
       </Group>
       <Group
          location = "group:math"
          name = "math">
+         <FileRef
+            location = "group:mat3.h">
+         </FileRef>
          <FileRef
             location = "group:../math/mat4.h">
          </FileRef>
@@ -92,5 +98,8 @@
             location = "group:src/Test/MRenderTest_OSX/MRenderTest_OSX.xcodeproj">
          </FileRef>
       </Group>
+      <FileRef
+         location = "group:src/MDocuments/MDocuments.xcodeproj">
+      </FileRef>
    </Group>
 </Workspace>
