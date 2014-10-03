@@ -55,15 +55,19 @@ namespace mrd {
     
     const ShaderStringType VS_MESH[] = {
         "uniform mat4 u_mvp;"\
+        "uniform mat3 u_mNormal;"\
         "attribute vec4 a_v;" \
-        "attribute vec4 a_vn;"\
+        "attribute vec3 a_vn;"\
         "varying vec4 v_color;"\
         "void main() {"\
+        "   vec3 lightPos = vec3(1.0, 1.0, 1.0);"\
+        "   vec3 lightDir = normalize(lightPos - a_v.xyz);"\
+        "   v_color = vec4(0.3, 0.3, 0.3, 1.0) + vec4(0.6, 0.6, 0.0, 1.0) * dot(normalize(u_mNormal * a_vn), lightPos);"\
+        "   v_color.w = 1.0;"\
         "   gl_Position = u_mvp * a_v;"\
-        "   v_color = vec4(1.0, 1.0, 0.0, 0.0);"\
         "}"
     };
-    
+    //
     const ShaderStringType PS_MESH[] = {
         ES_PS\
         "varying vec4 v_color;"\

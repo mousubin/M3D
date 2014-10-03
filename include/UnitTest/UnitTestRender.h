@@ -28,7 +28,13 @@ namespace mut {
             update();
             _rd->beginScene();
             _rd->clearColor(0x800000);
+            _rd->clearDepth(1.0f);
             _rd->clear(mrd::ColorBufferBit | mrd::DepthBufferBit);
+            glEnable(GL_DEPTH_TEST);
+            glEnable(GL_CULL_FACE);
+            glDepthFunc(GL_LEQUAL);
+            glFrontFace(GL_CCW);
+            glCullFace(GL_BACK);
             render();
             _rd->endScene();
             _rd->show();

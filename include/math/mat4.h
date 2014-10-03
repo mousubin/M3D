@@ -11,6 +11,7 @@
 
 #include <math.h>
 #include "vec3.h"
+#include "mat3.h"
 
 namespace mco {
 
@@ -36,7 +37,7 @@ union mat4_t
         return true;
     }    
     static mat4_t & multiply(mat4_t &left, mat4_t &right) {
-        mat4_t m;
+        static mat4_t m;
         m.m[0]  = left.m[0] * right.m[0]  + left.m[4] * right.m[1]  + left.m[8] * right.m[2]   + left.m[12] * right.m[3];
         m.m[4]  = left.m[0] * right.m[4]  + left.m[4] * right.m[5]  + left.m[8] * right.m[6]   + left.m[12] * right.m[7];
         m.m[8]  = left.m[0] * right.m[8]  + left.m[4] * right.m[9]  + left.m[8] * right.m[10]  + left.m[12] * right.m[11];
@@ -61,6 +62,17 @@ union mat4_t
     }
     void operator *= (mat4_t &mm) {
         
+    }
+    void getMatrix3(mat3_t<T> &m3) {
+        m3.m00 = m00;
+        m3.m01 = m01;
+        m3.m02 = m02;
+        m3.m10 = m10;
+        m3.m11 = m11;
+        m3.m12 = m12;
+        m3.m20 = m20;
+        m3.m21 = m21;
+        m3.m22 = m22;
     }
     void makeIdentity() {
         memset(m, 0, sizeof(m));

@@ -72,7 +72,7 @@ class T_Shape : public MRenderTestCase
 {
     Shape *_shape;
     Shader _shader;
-    int _mvp;
+    int _mvp, _mNormal;
 public:
     MT_RENDER_CASE_DECLARE(Shape)
     
@@ -82,6 +82,7 @@ public:
         _shape->bindAttrib(_shader);
         _shader.make();
         _mvp = _shader.getUniform("u_mvp");
+        _mNormal = _shader.getUniform("u_mNormal");
     }
     virtual void render() {
         // init();
@@ -97,13 +98,19 @@ public:
         mWorld = mat4f::multiply(mWorld, mR);
         
         mat4f mView;
-        mView.makeLookAt(0, 3, 10, 0, 0, 0, 0, 1, 0);
+        float d = 2.0f;
+        mView.makeLookAt(d * cos(radians), d, d * sin(radians), 0, 0, 0, 0, 1, 0);
+        mat3f mNormal;
+        mView.getMatrix3(mNormal);
+        mNormal.invertAndTranspose();
         
         mat4f mvp = mat4f::multiply(mPrj, mView);
         //mvp.makeIdentity();
         _shader.setUniform(_mvp, mvp);
+        //mNormal.makeIdentity();
+        _shader.setUniform(_mNormal, mNormal);
         
-        _rd->draw(GL_TRIANGLE_FAN, 0, 18);
+        _rd->draw(GL_TRIANGLES, 0, 18);
         _err = glGetError();
     }
 };
@@ -143,6 +150,29 @@ public:
         _shader.apply();
         _tex.apply();
         _rd->draw(GL_TRIANGLE_FAN, 0, 4);
+    }
+};
+
+
+class T_Geometry : public MRenderTestCase
+{
+    Lines *_pl;
+public:
+    MT_RENDER_CASE_DECLARE(Geometry)
+    virtual void init() {
+        ColorVertex v[] = {
+              0,   0,   0,  0xff0000ff,
+            100,   0,   0,  0xff0000ff,
+              0,   0,   0,  0xff00ff00,
+              0, 100,   0,  0xff00ff00,
+              0,   0,   0,  0xffff0000,
+              0,   0, 100,  0xffff0000
+        };
+        _pl = new Lines(v, 4);
+    }
+    virtual void render() {
+       // _rd->drawLine();
+       // _rd->drawGeometry();
     }
 };
 

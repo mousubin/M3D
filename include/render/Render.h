@@ -16,6 +16,8 @@
 #include "Texture.h"
 #include "math/vec4.h"
 
+#include "Geometry.h"
+
 namespace mrd {
     
     class Target
@@ -68,6 +70,13 @@ namespace mrd {
             Color cr;
             cr.fromUINT(color);
             glClearColor(cr.r, cr.g, cr.b, cr.a);
+        }
+        void clearDepth(float f) {
+#ifdef __MRENDER_IOS__
+            glClearDepthf(f);
+#else
+            glClearDepth(f);
+#endif
         }
         void draw(int mode, int first, int count) {
             glDrawArrays(mode, first, count);

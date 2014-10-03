@@ -155,7 +155,7 @@ GLfloat gCubeVertexData[216] =
     
     MT_CASES
     {
-        MT_RENDER_CASE(Tex, _rd);
+        MT_RENDER_CASE(Shape, _rd);
     }
 }
 
@@ -304,6 +304,13 @@ GLfloat gCubeVertexData[216] =
         NSLog(@"Failed to compile vertex shader");
         return NO;
     }
+    
+//    NSString *filename = [[NSBundle mainBundle] pathForResource:@"A" ofType:@"txt"];
+//    const char *pcstr = [filename cStringUsingEncoding:NSASCIIStringEncoding];
+//    FILE *fp = fopen(pcstr, "r");
+//    char buf[1000];
+//    int n = fread(buf, 1, 1000, fp);
+//    fclose(fp);
     
     // Create and compile fragment shader.
     fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];

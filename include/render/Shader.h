@@ -61,6 +61,9 @@ namespace mrd {
         void setUniform(unsigned int id, mco::mat4f &m) {
             glUniformMatrix4fv(id, 1, false, m);
         }
+        void setUniform(unsigned int id, mco::mat3f &m) {
+            glUniformMatrix3fv(id, 1, false, m);
+        }
         void setTexture(unsigned int id, unsigned int tex) {
             glUniform1i(id, tex);
         }
@@ -93,6 +96,18 @@ namespace mrd {
         void apply() {
             glUseProgram(_idPG);
         }
+    };
+    
+    class ShaderFactory
+    {
+    public:
+        void init() {
+            
+        }
+        Shader *getShader() {
+            return 0;
+        }
+        
     };
 };
 

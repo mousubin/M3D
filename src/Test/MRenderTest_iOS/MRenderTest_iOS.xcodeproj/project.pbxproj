@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0436996319DDB5540014E1CA /* A.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A.h; sourceTree = "<group>"; };
 		04B711F319C9BFD500C19D41 /* MRenderTest_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MRenderTest_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B711F619C9BFD500C19D41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04B711F819C9BFD500C19D41 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,6 +131,7 @@
 		04B7120019C9BFD500C19D41 /* MRenderTest_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				0436996319DDB5540014E1CA /* A.h */,
 				04B7120919C9BFD500C19D41 /* AppDelegate.h */,
 				04B7120A19C9BFD500C19D41 /* AppDelegate.m */,
 				04B7120C19C9BFD500C19D41 /* Main_iPhone.storyboard */,
