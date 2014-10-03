@@ -99,8 +99,11 @@ namespace mut {
             int n;
             va_start(args, fmt);
             char buf[1024];
-            //n = vsprintf(buf, fmt, args);
+#ifdef WIN32
 			n = vsprintf_s(buf, 1024, fmt, args);
+#else
+            n = vsprintf(buf, fmt, args);
+#endif
             va_end(args);
             std::cout << buf;
         }
