@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{BC1603AB-03D2-4705-9B34-EC8D43B1450C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "math", "math", "{AB1E1284-600C-4813-83F5-C332C23238B4}"
+	ProjectSection(SolutionItems) = preProject
+		include\math\mat4.h = include\math\mat4.h
+		include\math\math.h = include\math\math.h
+		include\math\vec2.h = include\math\vec2.h
+		include\math\vec3.h = include\math\vec3.h
+		include\math\vec4.h = include\math\vec4.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "render", "render", "{76812937-43B3-4C12-BB55-C32DB76E4F29}"
+	ProjectSection(SolutionItems) = preProject
+		include\render\Render.h = include\render\Render.h
+		include\render\RenderTypes.h = include\render\RenderTypes.h
+		include\render\Shader.h = include\render\Shader.h
+		include\render\ShaderCode.h = include\render\ShaderCode.h
+		include\render\Shape.h = include\render\Shape.h
+		include\render\Texture.h = include\render\Texture.h
+		include\render\Vertex.h = include\render\Vertex.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{A62CECB0-5B48-44DE-9E77-014982C301D7}"
+	ProjectSection(SolutionItems) = preProject
+		include\UnitTest\UnitTest.h = include\UnitTest\UnitTest.h
+		include\UnitTest\UnitTestRender.h = include\UnitTest\UnitTestRender.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F9764DCD-1FF0-4793-9EFE-206DE77C08B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MRenderTest_MFC", "src\Test\MRenderTest_MFC\MRenderTest_MFC.vcxproj", "{B69219FE-78D1-4040-93AB-6CF974B4A11B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B69219FE-78D1-4040-93AB-6CF974B4A11B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B69219FE-78D1-4040-93AB-6CF974B4A11B}.Debug|Win32.Build.0 = Debug|Win32
+		{B69219FE-78D1-4040-93AB-6CF974B4A11B}.Release|Win32.ActiveCfg = Release|Win32
+		{B69219FE-78D1-4040-93AB-6CF974B4A11B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB1E1284-600C-4813-83F5-C332C23238B4} = {BC1603AB-03D2-4705-9B34-EC8D43B1450C}
+		{76812937-43B3-4C12-BB55-C32DB76E4F29} = {BC1603AB-03D2-4705-9B34-EC8D43B1450C}
+		{A62CECB0-5B48-44DE-9E77-014982C301D7} = {BC1603AB-03D2-4705-9B34-EC8D43B1450C}
+		{B69219FE-78D1-4040-93AB-6CF974B4A11B} = {F9764DCD-1FF0-4793-9EFE-206DE77C08B0}
+	EndGlobalSection
+EndGlobal

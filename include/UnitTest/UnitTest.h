@@ -1,4 +1,4 @@
-//
+﻿//
 //  UnitTest.h
 //  
 //
@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <iostream>
+#include <stdarg.h>
 
 namespace mut {
 
@@ -97,8 +98,9 @@ namespace mut {
             va_list args;
             int n;
             va_start(args, fmt);
-            char buf[4096];
-            n = vsprintf(buf, fmt, args);
+            char buf[1024];
+            //n = vsprintf(buf, fmt, args);
+			n = vsprintf_s(buf, 1024, fmt, args);
             va_end(args);
             std::cout << buf;
         }
