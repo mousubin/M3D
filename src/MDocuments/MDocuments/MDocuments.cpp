@@ -6,7 +6,6 @@
 //  Copyright (c) 2014年 msb. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #include "MDocuments.h"
 
 namespace mdoc {
@@ -18,9 +17,10 @@ namespace mdoc {
     
     const char * MDocs::findPathName(const char *pathName, const char *fileName) {
         
-        NSString *filename = [[NSBundle mainBundle] pathForResource:@"A" ofType:@"txt"];
-        _pathName = [filename cStringUsingEncoding:NSASCIIStringEncoding];
-        return _pathName.c_str();
+//        NSString *filename = [[NSBundle mainBundle] pathForResource:@"A" ofType:@"txt"];
+//        _pathName = [filename cStringUsingEncoding:NSASCIIStringEncoding];
+//        return _pathName.c_str();
+        return 0;
     }
     
     

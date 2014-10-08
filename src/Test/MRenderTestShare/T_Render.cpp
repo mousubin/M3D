@@ -7,3 +7,5 @@
 //
 
 #include "T_Render.h"
+
+Archive _archive;

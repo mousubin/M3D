@@ -5,6 +5,13 @@
       location = "group:include"
       name = "include">
       <Group
+         location = "container:"
+         name = "docs">
+         <FileRef
+            location = "group:include/docs/Archive.h">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:render"
          name = "render">
          <FileRef
@@ -26,13 +33,16 @@
             location = "group:Shape.h">
          </FileRef>
          <FileRef
-            location = "group:Shape.cpp">
-         </FileRef>
-         <FileRef
             location = "group:Texture.h">
          </FileRef>
          <FileRef
             location = "group:Geometry.h">
+         </FileRef>
+         <FileRef
+            location = "group:../mTypes.h">
+         </FileRef>
+         <FileRef
+            location = "group:../math/rect.h">
          </FileRef>
       </Group>
       <Group
@@ -73,10 +83,6 @@
       name = "src">
       <Group
          location = "container:"
-         name = "Render">
-      </Group>
-      <Group
-         location = "container:"
          name = "Test">
          <Group
             location = "group:src/Test/MRenderTestShare"
@@ -100,6 +106,12 @@
       </Group>
       <FileRef
          location = "group:src/MDocuments/MDocuments.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:src/MRender/MRender.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:src/MMath/MMath.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

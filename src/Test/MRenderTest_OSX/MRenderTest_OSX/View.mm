@@ -65,19 +65,6 @@ CVReturn OutputCallback(CVDisplayLinkRef displayLink,
 
 @implementation View
 
-
-- (id)initWithFrame:(NSRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
-    
-        return self;
-}
-
-
-
 - (CVReturn)getFrameForTime:(const CVTimeStamp*)outputTime
 {
     // Add your drawing codes here
@@ -85,10 +72,23 @@ CVReturn OutputCallback(CVDisplayLinkRef displayLink,
     return kCVReturnSuccess;
 }
 
+- (id)init
+{
+    return [super init];
+}
+
+- (void) reshape
+{
+    NSRect backingBounds = [self convertRectToBacking:[self bounds]];
+    GLsizei backingPixelWidth  = (GLsizei)(backingBounds.size.width),
+    backingPixelHeight = (GLsizei)(backingBounds.size.height);
+    if (_rd)
+        _rd->setViewport(0, 0, backingPixelWidth, backingPixelHeight);
+}
+
+
 - (void)initRender
 {
-
-
     static bool bInit = false;
     if (bInit)
         return;
@@ -102,20 +102,48 @@ CVReturn OutputCallback(CVDisplayLinkRef displayLink,
     CVDisplayLinkSetOutputCallback(_displayLink, &OutputCallback, (__bridge void *)self);
     CVDisplayLinkStart(_displayLink);
     
+    NSString *resPath = [[NSBundle mainBundle] resourcePath];
+    std::string strResPath = [resPath cStringUsingEncoding:NSASCIIStringEncoding];
+    strResPath += "/data";
+    _archive.open(strResPath.c_str());
+    
     _rd = new mrd::Render;
+    _rd->init();
+    std::cout << _rd->_openGLInfo;
     
     MT_CASES
     {
         MT_RENDER_CASE(Shape, _rd)
-    }    
+        MT_RENDER_CASE(Geometry, _rd)
+        MT_RENDER_CASE(Tex, _rd)
+        MT_RENDER_CASE(Vertex, _rd)
+    }
+    MRenderTestSuite::getInstance()->setRender(_rd);
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    
+    //[self  setWantsBestResolutionOpenGLSurface:YES];
+    [[self openGLContext] makeCurrentContext];
     [super drawRect:dirtyRect];
     [self initRender];
-    MT_RUN
-    //
+    
+    NSRect backingBounds = [self convertRectToBacking:[self bounds]];
+    GLsizei backingPixelWidth  = (GLsizei)(backingBounds.size.width),
+    backingPixelHeight = (GLsizei)(backingBounds.size.height);
+    _rd->setViewport(0, 0, backingPixelWidth, backingPixelHeight);
+    MT_RENDER_RUN
+    
+//    glColor3f(1.0f, 0.85f, 0.35f);
+//    glBegin(GL_TRIANGLES);
+//    {
+//        glVertex3f(  0.0,  0.6, 0.0);
+//        glVertex3f( -0.2, -0.3, 0.0);
+//        glVertex3f(  0.2, -0.3 ,0.0);
+//    }
+//    glEnd();
+//    glFlush();
 }
 
 @end

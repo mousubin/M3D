@@ -144,19 +144,30 @@ GLfloat gCubeVertexData[216] =
 //    iOSTargetFactory *tf = iOSTargetFactory::getInstance();
 //    tf->setContext(self.context);
 //    mrd::RenderSystem::getInstance()->installTargetFactory(tf);
-    
+    //GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG
+    //GL_ETC1_RGB8_OES
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
     
-    _rd = new mrd::Render;
+    NSString *resPath = [[NSBundle mainBundle] resourcePath];
+    std::string strResPath = [resPath cStringUsingEncoding:NSASCIIStringEncoding];
+    strResPath += "/data";
+    _archive.open(strResPath.c_str());
     
+    _rd = new mrd::Render;
+    _rd->init();
+    std::cout << _rd->_openGLInfo;
     MT_CASES
     {
-        MT_RENDER_CASE(Shape, _rd);
+        MT_RENDER_CASE(Shape, _rd)
+        MT_RENDER_CASE(Geometry, _rd)
+        MT_RENDER_CASE(Tex, _rd)
+        MT_RENDER_CASE(Vertex, _rd)
     }
+    MRenderTestSuite::getInstance()->setRender(_rd);
 }
 
 - (void)dealloc
@@ -232,6 +243,7 @@ GLfloat gCubeVertexData[216] =
 
 - (void)update
 {
+    CGSize sz = self.view.bounds.size;
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
@@ -264,7 +276,11 @@ GLfloat gCubeVertexData[216] =
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
  //   RenderTestSuite::getInstance(0)->run();
-    MT_RUN;
+    CGRect backingBounds = [self.view bounds];
+    int w = self.view.bounds.size.width;
+    int h = self.view.bounds.size.height;
+    _rd->setViewport(0, 0, w*2, h*2);
+    MT_RENDER_RUN;
 //    mrd::Render render;
 //    render.beginScene();
 //    render.clear();
@@ -305,8 +321,9 @@ GLfloat gCubeVertexData[216] =
         return NO;
     }
     
-//    NSString *filename = [[NSBundle mainBundle] pathForResource:@"A" ofType:@"txt"];
-//    const char *pcstr = [filename cStringUsingEncoding:NSASCIIStringEncoding];
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"A" ofType:@"txt"];
+    NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+    const char *pcstr = [filename cStringUsingEncoding:NSASCIIStringEncoding];
 //    FILE *fp = fopen(pcstr, "r");
 //    char buf[1000];
 //    int n = fread(buf, 1, 1000, fp);

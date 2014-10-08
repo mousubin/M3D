@@ -1,4 +1,4 @@
-﻿//
+//
 //  UnitTest.h
 //  
 //
@@ -60,6 +60,7 @@ namespace mut {
     // 测试套件
     class MTestSuite : public MTestObject
     {
+    protected:
         std::vector<MTestCase *> _list;
         int _allCount;
         int _errCount;
@@ -81,9 +82,12 @@ namespace mut {
         }
         // 记录测试是否成功
         void success(bool b) { _allCount++; if (!b) _errCount++; }
+        virtual void begin() {}
+        virtual void end() {}
         // 运行测试套件
-        void run(){
+        virtual void run(){
             log("*** [Test Start] ***\n");
+            begin();
             std::vector<MTestCase *>::iterator iter;
             for (iter=_list.begin(); iter!=_list.end(); iter++){
                 log("===> TestCase : %s\n", (*iter)->name());
@@ -91,6 +95,7 @@ namespace mut {
                 (*iter)->run();
                 (*iter)->end();
             }
+            end();
             log("*** [ Test End ] ***\nTest Result: count=%d, error=%d.\n", _allCount, _errCount);
         }
         // 日志输出

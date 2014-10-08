@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04713B9619E32688009D5E64 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 04713B9519E32688009D5E64 /* data */; };
+		04713BA219E43026009D5E64 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04713B9C19E43026009D5E64 /* Geometry.cpp */; };
+		04713BA319E43026009D5E64 /* Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04713B9D19E43026009D5E64 /* Render.cpp */; };
+		04713BA419E43026009D5E64 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04713B9E19E43026009D5E64 /* Shader.cpp */; };
+		04713BA519E43026009D5E64 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04713B9F19E43026009D5E64 /* Texture.cpp */; };
 		04B711F719C9BFD500C19D41 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B711F619C9BFD500C19D41 /* Foundation.framework */; };
 		04B711F919C9BFD500C19D41 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B711F819C9BFD500C19D41 /* CoreGraphics.framework */; };
 		04B711FB19C9BFD500C19D41 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B711FA19C9BFD500C19D41 /* UIKit.framework */; };
@@ -40,7 +45,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0436996319DDB5540014E1CA /* A.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A.h; sourceTree = "<group>"; };
+		04713B3719E04527009D5E64 /* libMRender.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMRender.a; path = ../../../bin/Debug/libMRender.a; sourceTree = "<group>"; };
+		04713B9519E32688009D5E64 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../../data; sourceTree = "<group>"; };
+		04713B9C19E43026009D5E64 /* Geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Geometry.cpp; path = ../../MRender/Geometry.cpp; sourceTree = "<group>"; };
+		04713B9D19E43026009D5E64 /* Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Render.cpp; path = ../../MRender/Render.cpp; sourceTree = "<group>"; };
+		04713B9E19E43026009D5E64 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = ../../MRender/Shader.cpp; sourceTree = "<group>"; };
+		04713B9F19E43026009D5E64 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = ../../MRender/Texture.cpp; sourceTree = "<group>"; };
+		04713BA819E43071009D5E64 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Geometry.h; path = ../../../include/render/Geometry.h; sourceTree = "<group>"; };
+		04713BA919E43071009D5E64 /* Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Render.h; path = ../../../include/render/Render.h; sourceTree = "<group>"; };
+		04713BAA19E43071009D5E64 /* RenderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderTypes.h; path = ../../../include/render/RenderTypes.h; sourceTree = "<group>"; };
+		04713BAB19E43071009D5E64 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = ../../../include/render/Shader.h; sourceTree = "<group>"; };
+		04713BAC19E43071009D5E64 /* ShaderCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderCode.h; path = ../../../include/render/ShaderCode.h; sourceTree = "<group>"; };
+		04713BAD19E43071009D5E64 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shape.h; path = ../../../include/render/Shape.h; sourceTree = "<group>"; };
+		04713BAE19E43071009D5E64 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Texture.h; path = ../../../include/render/Texture.h; sourceTree = "<group>"; };
+		04713BAF19E43071009D5E64 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = ../../../include/render/Vertex.h; sourceTree = "<group>"; };
 		04B711F319C9BFD500C19D41 /* MRenderTest_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MRenderTest_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B711F619C9BFD500C19D41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04B711F819C9BFD500C19D41 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,9 +113,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04713B9B19E43000009D5E64 /* MRender */ = {
+			isa = PBXGroup;
+			children = (
+				04713BA819E43071009D5E64 /* Geometry.h */,
+				04713BA919E43071009D5E64 /* Render.h */,
+				04713BAA19E43071009D5E64 /* RenderTypes.h */,
+				04713BAB19E43071009D5E64 /* Shader.h */,
+				04713BAC19E43071009D5E64 /* ShaderCode.h */,
+				04713BAD19E43071009D5E64 /* Shape.h */,
+				04713BAE19E43071009D5E64 /* Texture.h */,
+				04713BAF19E43071009D5E64 /* Vertex.h */,
+				04713B9C19E43026009D5E64 /* Geometry.cpp */,
+				04713B9D19E43026009D5E64 /* Render.cpp */,
+				04713B9E19E43026009D5E64 /* Shader.cpp */,
+				04713B9F19E43026009D5E64 /* Texture.cpp */,
+			);
+			name = MRender;
+			sourceTree = "<group>";
+		};
 		04B711EA19C9BFD500C19D41 = {
 			isa = PBXGroup;
 			children = (
+				04713B9B19E43000009D5E64 /* MRender */,
+				04713B9519E32688009D5E64 /* data */,
 				04B7127B19CAFCDB00C19D41 /* TestCase */,
 				04B7120019C9BFD500C19D41 /* MRenderTest_iOS */,
 				04B7122619C9BFD500C19D41 /* MRenderTest_iOSTests */,
@@ -118,6 +157,7 @@
 		04B711F519C9BFD500C19D41 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04713B3719E04527009D5E64 /* libMRender.a */,
 				04B711F619C9BFD500C19D41 /* Foundation.framework */,
 				04B711F819C9BFD500C19D41 /* CoreGraphics.framework */,
 				04B711FA19C9BFD500C19D41 /* UIKit.framework */,
@@ -131,7 +171,6 @@
 		04B7120019C9BFD500C19D41 /* MRenderTest_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0436996319DDB5540014E1CA /* A.h */,
 				04B7120919C9BFD500C19D41 /* AppDelegate.h */,
 				04B7120A19C9BFD500C19D41 /* AppDelegate.m */,
 				04B7120C19C9BFD500C19D41 /* Main_iPhone.storyboard */,
@@ -261,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B7121319C9BFD500C19D41 /* Shader.fsh in Resources */,
+				04713B9619E32688009D5E64 /* data in Resources */,
 				04B7121119C9BFD500C19D41 /* Main_iPad.storyboard in Resources */,
 				04B7120E19C9BFD500C19D41 /* Main_iPhone.storyboard in Resources */,
 				04B7121A19C9BFD500C19D41 /* Images.xcassets in Resources */,
@@ -285,7 +325,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B7127E19CAFCE900C19D41 /* T_Render.cpp in Sources */,
+				04713BA319E43026009D5E64 /* Render.cpp in Sources */,
 				04B7121819C9BFD500C19D41 /* ViewController.mm in Sources */,
+				04713BA219E43026009D5E64 /* Geometry.cpp in Sources */,
+				04713BA419E43026009D5E64 /* Shader.cpp in Sources */,
+				04713BA519E43026009D5E64 /* Texture.cpp in Sources */,
 				04B7120B19C9BFD500C19D41 /* AppDelegate.m in Sources */,
 				04B7120719C9BFD500C19D41 /* main.m in Sources */,
 			);
@@ -427,6 +471,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = __MRENDER_IOS__;
 				INFOPLIST_FILE = "MRenderTest_iOS/MRenderTest_iOS-Info.plist";
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/mac/Desktop/develop/M3D/bin/Debug,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = ../../../include;
 				WRAPPER_EXTENSION = app;
@@ -443,6 +491,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = __MRENDER_IOS__;
 				INFOPLIST_FILE = "MRenderTest_iOS/MRenderTest_iOS-Info.plist";
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/mac/Desktop/develop/M3D/bin/Debug,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = ../../../include;
 				WRAPPER_EXTENSION = app;

@@ -15,17 +15,27 @@
 
 namespace mrd {
     
-    class Lines
+    class Render;
+    
+    class Geometry : public RenderObject
     {
+    protected:
         VertexBuffer _vb;
         Shader *_shader;
+    public:
+        virtual void render(Render *rd);
+    };
+    
+    class Lines : public Geometry
+    {
+        
     public:
         Lines(ColorVertex *v, int nLines) {
             createLines(v, nLines);
         }
         void createLines(ColorVertex *v, int nLines) {
-        //    _vb.setData(v, nLInes, VA_VERTEX | VA_COLOR);
-         //   _shader = Shader::getShader(SHADER_COLORVERTEX);
+            _vb.setData(v, nLines * sizeof(ColorVertex), VA_VERTEX | VA_COLOR);
+            _shader = Shader::getShader(0);
             
         }
     };

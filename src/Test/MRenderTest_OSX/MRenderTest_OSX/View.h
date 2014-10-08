@@ -15,8 +15,10 @@
 @property mrd::Render *rd;
 @property CVDisplayLinkRef displayLink;
 
-
+- (id)init;
 - (void) initRender;
 - (CVReturn)getFrameForTime:(const CVTimeStamp*)outputTime;
+- (void) reshape;
+
 
 @end

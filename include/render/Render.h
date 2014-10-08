@@ -53,16 +53,43 @@ namespace mrd {
     
     class Render
     {
+        mco::mat4f _mPrj, _mView, _mWorld;
+        mco::mat4f _mvp;
+        mco::mat3f _mNormal;
+        int _nVertexArrays;
     public:
+        int _viewWidth, _viewHeight;
+        std::string _openGLInfo;
+    public:
+        Render() {
+            _nVertexArrays = 0;
+            mco::mat4f m;
+            m.makeIdentity();
+            setMatrix(&m, &m, &m);
+            _viewWidth = _viewHeight = 1.0f;
+        }
         void setTarget(Target *target){
             target->active();
         }
         void beginScene(){}
         void endScene(){}
-        void show() {
-            glFlush();
+        void show() { glFlush(); }
+    public:
+        void setMatrix(mco::mat4f *mPrj, mco::mat4f *mView, mco::mat4f *mWorld) {
+            if (mPrj)   _mPrj = *mPrj;
+            if (mView)  _mView = *mView;
+            if (mWorld) _mWorld = *mWorld;
+            _mvp = _mPrj * _mView * _mWorld;
+            _mView.getMatrix3(_mNormal);
+            _mNormal.invertAndTranspose();
         }
     public:
+        void init() {
+            getOpenGLInfo();
+        }
+        void getOpenGLInfo() {
+            _openGLInfo = (char *)glGetString(GL_EXTENSIONS);
+        }
         void clear(int bufferBit){
             glClear(bufferBit);
         }
@@ -78,8 +105,40 @@ namespace mrd {
             glClearDepth(f);
 #endif
         }
+        void setViewport(int x, int y, int width, int height) {
+            _viewWidth = width;
+            _viewHeight = height;
+            glViewport(x, y, width, height);
+        }
+        void enableVertexArrays(VertexBuffer *vb, unsigned int attribBit) {
+            vb->apply(attribBit);
+            _nVertexArrays = vb->_nCurVertexArrays;
+        }
+        void endDraw() {
+            for (int i = 0; i < _nVertexArrays; i++)
+                glDisableVertexAttribArray(i);
+            glUseProgram(0);
+        }
+        void setUniform(Shader &shader) {
+            for (int i = 0; i < shader._nUniforms; i++) {
+                int j = shader._uniforms[i];
+                int loc = shader._uniformLocations[i];
+                switch (__standardUniform[j].uniform) {
+                    case U_MVP:
+                        shader.setUniform(loc, _mvp);
+                        break;
+                    case U_NORMAL_MATRIX:
+                        shader.setUniform(loc, _mNormal);
+                        break;
+                }
+            }
+        }
         void draw(int mode, int first, int count) {
             glDrawArrays(mode, first, count);
+        }
+        void draw(RenderObject *ro) {
+            ro->render(this);
+            endDraw();
         }
     };
     

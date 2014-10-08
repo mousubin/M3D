@@ -9,11 +9,8 @@
 #ifndef _ShaderCode_h
 #define _ShaderCode_h
 
-#ifdef __MRENDER_IOS__
-#define ES_PS   "#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n"
-#else
-#define ES_PS
-#endif
+
+#define SHADER_VERSION  "#ifdef GL_ES\n #ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\n"
 
 
 namespace mrd {
@@ -28,6 +25,7 @@ namespace mrd {
     };
     
     const ShaderStringType PS_CODE[] = {
+        SHADER_VERSION\
         "void main() {"\
         "   gl_FragColor = vec4(1, 0, 0, 1);"\
         "}"
@@ -45,8 +43,7 @@ namespace mrd {
     };
     
     const ShaderStringType PS_COLOR[] = {
-        ES_PS\
-    
+        SHADER_VERSION\
         "varying vec4 v_color;"\
         "void main() {"\
         "   gl_FragColor = v_color;"\
@@ -69,7 +66,7 @@ namespace mrd {
     };
     //
     const ShaderStringType PS_MESH[] = {
-        ES_PS\
+        SHADER_VERSION\
         "varying vec4 v_color;"\
         "void main() {"\
         "   gl_FragColor = v_color;"\
@@ -87,7 +84,7 @@ namespace mrd {
     };
     
     const ShaderStringType PS_UI[] = {
-        ES_PS\
+        SHADER_VERSION\
         "uniform sampler2D u_tex0;"\
         "varying vec2 v_tex0;"\
         "void main() {"\

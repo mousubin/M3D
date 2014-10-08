@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0436997119DE4F140014E1CA /* MDocuments.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0436997019DE4F140014E1CA /* MDocuments.h */; };
-		0436997319DE4F140014E1CA /* MDocuments.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0436997219DE4F140014E1CA /* MDocuments.mm */; };
+		0436997319DE4F140014E1CA /* MDocuments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0436997219DE4F140014E1CA /* MDocuments.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		0436996D19DE4F140014E1CA /* libMDocuments.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMDocuments.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0436997019DE4F140014E1CA /* MDocuments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDocuments.h; sourceTree = "<group>"; };
-		0436997219DE4F140014E1CA /* MDocuments.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MDocuments.mm; sourceTree = "<group>"; };
+		0436997219DE4F140014E1CA /* MDocuments.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MDocuments.cpp; sourceTree = "<group>"; };
 		0436997819DE4F140014E1CA /* MDocumentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MDocumentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0436997B19DE4F140014E1CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				0436997019DE4F140014E1CA /* MDocuments.h */,
-				0436997219DE4F140014E1CA /* MDocuments.mm */,
+				0436997219DE4F140014E1CA /* MDocuments.cpp */,
 			);
 			path = MDocuments;
 			sourceTree = "<group>";
@@ -180,7 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0436997319DE4F140014E1CA /* MDocuments.mm in Sources */,
+				0436997319DE4F140014E1CA /* MDocuments.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +335,7 @@
 				0436998019DE4F140014E1CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0436998119DE4F140014E1CA /* Build configuration list for PBXNativeTarget "MDocumentsTests" */ = {
 			isa = XCConfigurationList;
@@ -343,6 +344,7 @@
 				0436998319DE4F140014E1CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

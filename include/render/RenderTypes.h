@@ -11,6 +11,7 @@
 
 #ifdef __MRENDER_IOS__
 	#include <OpenGLES/ES2/gl.h>
+    #include <OpenGLES/ES2/glext.h>
 #else
 	#ifdef WIN32
 		#include <GL/glew.h>
@@ -20,7 +21,7 @@
 #endif
 
 
-
+#include <string>
 #include "math/vec4.h"
 
 namespace mrd {
@@ -31,6 +32,9 @@ namespace mrd {
     };
     
     typedef mco::vec4f   Color;
+#ifndef WIN32
+    typedef const char *    LPCTSTR;
+#endif
     
     enum VertexAttribBit{
         VA_VERTEX = 1,
@@ -55,7 +59,33 @@ namespace mrd {
         VA_COLOR, 4, GL_UNSIGNED_BYTE, true, 4, "a_color",
         VA_TEX0, 2, GL_FLOAT, false, 8, "a_tex0",
     };
+    const int __vaConfigCount = sizeof(__vaConfig) / sizeof(VertexAttrib);
     
+    enum UniformBit
+    {
+        U_MVP = 1,
+        U_NORMAL_MATRIX = 2,
+        U_TIME = 4,
+    };
+    
+    struct UniformInfo
+    {
+        int uniform;
+        char name[32];
+    };
+    const UniformInfo __standardUniform[] = {
+        U_MVP, "u_mvp",
+        U_NORMAL_MATRIX, "u_mNormal",
+        U_TIME, "u_time"
+    };
+    const int __standardUniformCount = sizeof(__standardUniform) / sizeof(UniformInfo);
+    
+    class Render;
+    class RenderObject
+    {
+    public:
+        virtual void render(Render *rd) = 0;
+    };
 };
 
 #endif
